@@ -14,6 +14,7 @@ impl LineBot {
     pub fn reply_message(&self, event: &model::Event, messages: serde_json::Value) {
         let res = reqwest::blocking::Client::default()
             .post("https://api.line.me/v2/bot/message/reply")
+            .header("User-Agent", "line-bot-sdk-rust/0.1.0")
             .header("Content-Type", "application/json")
             .header("Authorization", format!("Bearer {}", self.channel_token))
             .json(&serde_json::json!({
